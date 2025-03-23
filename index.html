@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FedEx Tracking</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content slide-in">
+      <h2>Admin Login</h2>
+      <div class="input-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Enter username">
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter password">
+      </div>
+      <button id="loginBtn">Login</button>
+      <button id="closeModal" class="close-btn">&times;</button>
+    </div>
+  </div>
+
+  <!-- Admin Panel -->
+  <div id="adminPanel" class="admin-panel">
+    <div class="admin-content slide-in">
+      <h2>Admin Panel</h2>
+      <div class="admin-section">
+        <h3>Scheduled Delivery Data</h3>
+        <div class="input-group">
+          <label>Day</label>
+          <input type="text" id="adminDay" placeholder="Day">
+        </div>
+        <div class="input-group">
+          <label>Time</label>
+          <input type="text" id="adminTime" placeholder="Time">
+        </div>
+        <div class="input-group">
+          <label>Estimate Start</label>
+          <input type="text" id="adminEstimateStart" placeholder="Estimate Start">
+        </div>
+        <div class="input-group">
+          <label>Estimate End</label>
+          <input type="text" id="adminEstimateEnd" placeholder="Estimate End">
+        </div>
+      </div>
+
+      <div class="admin-section">
+        <h3>Package Image</h3>
+        <input type="file" id="packageImage" accept="image/*">
+        <div id="imagePreview"></div>
+      </div>
+
+      <div class="admin-section">
+        <h3>Tracking Timeline</h3>
+        <div class="timeline-edit">
+          <h4>From Location</h4>
+          <input type="text" id="fromLocation" placeholder="Location">
+          <input type="text" id="fromDate" placeholder="Date">
+        </div>
+        <div class="timeline-edit">
+          <h4>Current Location</h4>
+          <input type="text" id="currentLocation" placeholder="Location">
+          <input type="text" id="currentDate" placeholder="Date">
+        </div>
+        <div class="timeline-edit">
+          <h4>Destination</h4>
+          <input type="text" id="toLocation" placeholder="Location">
+          <input type="text" id="toDate" placeholder="Date">
+        </div>
+      </div>
+
+      <button id="saveChanges" class="save-btn">Save Changes</button>
+      <button id="closeAdmin" class="close-btn">&times;</button>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container header-content">
+      <div class="logo">Fed<span class="orange">Ex</span></div>
+      <div class="header-right">
+        <button>Sign Up or Log In</button>
+        <span class="icon user-icon">👤</span>
+        <span class="icon search-icon">🔍</span>
+        <span class="icon menu-icon">☰</span>
+      </div>
+    </div>
+  </header>
+
+  <nav class="subheader">
+    <div class="container subheader-content">
+      <h1>FedEx Tracking</h1>
+      <div class="nav-links">
+        <a href="#"><i class="icon">📦</i> Track Another Shipment</a>
+        <a href="#"><i class="icon">🕒</i> Local Scan Time ▼</a>
+        <a href="#"><i class="icon">❓</i> Help</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="banner">
+    <div class="container banner-content">
+      <div class="banner-text">
+        <div class="small">SHOPRUNNER by FedEx</div>
+        <div class="large">SHOPPING FOR THE HOLIDAYS?</div>
+        <div class="medium">SAVE WITH THE BEST DEALS OF THE SEASON.</div>
+      </div>
+      <button class="shop-now">SHOP NOW</button>
+    </div>
+  </div>
+
+  <main class="container main-content">
+    <div class="left-column fade-in">
+      <section class="delivery-data" style="margin-top: 30px;">
+        <h2>SCHEDULED DELIVERY DATA</h2>
+        <div class="day" id="displayDay">Wednesday</div>
+        <div class="time" id="displayTime">12/20/23 before 6:00 PM</div>
+        <div class="estimate" id="displayEstimateStart">Estimated between</div>
+        <div class="estimate" id="displayEstimateEnd">9:00 AM - 1:00 PM</div>
+        <span class="status-badge">ON TIME</span>
+      </section>
+
+     
+
+      <a href="#" class="more-option">MORE OPTION</a>
+
+      <div class="delivery-options">
+        <button class="options-btn">
+          Check For Delivery Options
+          <span class="arrow">▼</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="right-column fade-in">
+      <div class="tracking-header">
+        <h2>DELIVERY STATUS</h2>
+        <div class="tracking-id">
+          <span>TRACKING ID</span>
+          <div class="id-actions">
+            <span>930221989746</span>
+            <button class="icon-btn copy-btn">📋</button>
+            <button class="icon-btn star-btn">⭐</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="package-status">
+        <span>We have your package</span>
+        <span class="package-icon">📦</span>
+      </div>
+
+      <div id="packageImageDisplay" class="package-image-container">
+        <!-- Package image will be displayed here -->
+      </div>
+
+      <div class="tracking-timeline">
+        <div class="timeline-item active">
+          <div class="dot"></div>
+          <div class="content">
+            <div class="label">FROM</div>
+            <div class="location" id="displayFromLocation">TOLLESON, AZ US</div>
+            <div class="detail">Label Created</div>
+            <div class="detail" id="displayFromDate">12/14/23 11:05 AM</div>
+          </div>
+        </div>
+
+        <div class="timeline-item active">
+          <div class="dot"></div>
+          <div class="content">
+            <div class="label">WE HAVE YOUR PACKAGE</div>
+            <div class="location" id="displayCurrentLocation">PHOENIX, AZ</div>
+            <div class="detail" id="displayCurrentDate">12/14/23 2:26 PM</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="dot"></div>
+          <div class="content">
+            <div class="label">ON THE WAY</div>
+            <!-- <div class="icon">🚚</div> -->
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="dot"></div>
+          <div class="content">
+            <div class="label">OUT FOR DELIVERY</div>
+            <!-- <div class="icon">🚗</div> -->
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="dot"></div>
+          <div class="content">
+            <div class="label">TO</div>
+            <div class="location" id="displayToLocation">ST. CROIX, VI</div>
+            <div class="detail">Scheduled Delivery Date</div>
+            <div class="detail" id="displayToDate">12/20/23 before 6:00 PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="email-updates">
+      <p>Want updates on this shipment? Enter your email and we will do the rest!</p>
+      <div class="email-form">
+        <input type="email" placeholder="YOUR EMAIL" id="emailInput">
+        <button class="submit-btn">SUBMIT</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
